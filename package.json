@@ -9,6 +9,7 @@
     "format": "prettier --write 'src/**/*.{js,json}'"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",
     "vue-router": "^4.1.5"

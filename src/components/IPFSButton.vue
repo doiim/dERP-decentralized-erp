@@ -28,6 +28,7 @@
     },
     components: {},
     watch: {},
+    emits: ['filesUploaded'],
     methods: {
       uploadFile: function () {
         this.files = this.$refs.file.files
@@ -42,7 +43,7 @@
           const file = this.files.item(i)
           this.uploaded.push(gateway + cid + '/' + file.name)
         }
-        console.log(this.uploaded)
+        this.$emit('filesUploaded', this.uploaded)
         this.uploading = false
       },
     },

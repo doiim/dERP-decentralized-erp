@@ -31,7 +31,7 @@
         </aside>
       </div>
     </div>
-    <div class="w-full p-4 m-8 overflow-y-aut bg-white">
+    <div class="w-full p-3 m-8 overflow-y-aut bg-white">
       <div class="flex p-40">
         <router-view></router-view>
       </div>

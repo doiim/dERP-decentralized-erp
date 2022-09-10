@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ESGReward is ERC20, Ownable {
     
-    constructor () ERC20("ESGReward","ESGR") Ownable() {}
+    constructor () ERC20("ESGToken","ESGT") Ownable() {}
 
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);

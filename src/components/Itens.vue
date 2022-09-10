@@ -1,11 +1,11 @@
 <template>
   <h1>Itens</h1>
+  <IPFSButton @files-uploaded="filesHaveBeenUploaded"></IPFSButton>
 </template>
 
 <script>
   import { inject } from 'vue'
-  // import { ethers } from 'ethers'
-
+  import IPFSButton from './IPFSButton.vue'
   import { useAccountStore } from '../stores/account'
 
   export default {
@@ -19,9 +19,13 @@
         temp: false,
       }
     },
-    components: {},
+    components: { IPFSButton },
     watch: {},
-    methods: {},
+    methods: {
+      filesHaveBeenUploaded: function (files) {
+        console.log("Uploaded files", files)
+      }
+    },
   }
 </script>
 

@@ -46,5 +46,5 @@
 }
 
 .main-container {
-    @apply container light-shadow dark:dark-shadow bg-dark-green min-h-screen;
+    @apply light-shadow dark:dark-shadow bg-dark-green min-h-screen;
 }

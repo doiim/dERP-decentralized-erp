@@ -7,7 +7,6 @@ import Inventory from './components/Inventory.vue'
 import Invoice from './components/Invoice.vue'
 import Itens from './components/Itens.vue'
 import Recipes from './components/Recipes.vue'
-import IPFS from './components/IPFS.vue'
 import './main.css'
 import ConnectionPlugin from './plugins/connectionPlugin'
 
@@ -19,7 +18,6 @@ const routes = [
   { path: '/recipes', component: Recipes },
   { path: '/inventory', component: Inventory },
   { path: '/invoice', component: Invoice },
-  { path: '/ipfs', component: IPFS },
 ]
 const router = createRouter({
   history: createWebHistory(),

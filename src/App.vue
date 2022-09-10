@@ -1,13 +1,7 @@
 <template>
   <div class="flex">
-    <div class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto border-r">
-      <img
-        src="./assets/derp_logo.png"
-        class="mt-1"
-        style="width: 120px"
-        alt=""
-      />
-      <h1 class="normal-case">dERP</h1>
+    <div class="sidebar flex flex-col h-screen px-2 py-8 overflow-y-auto border-r">
+      <h3 class="normal-case">web3RP</h3>
 
       <div class="flex flex-col justify-between mt-6">
         <aside>
@@ -15,24 +9,18 @@
             <li class="my-1">
               <router-link to="/">Home</router-link>
             </li>
-            <!-- <li class="my-1">
-              <router-link to="/itens">Itens</router-link>
-            </li> -->
             <li class="my-1">
               <router-link to="/inventory">Inventory</router-link>
             </li>
             <li class="my-1">
-              <router-link to="/recipes">Recipes</router-link>
-            </li>
-            <li class="my-1">
-              <router-link to="/invoice">Invoice</router-link>
+              <router-link to="/invoice">Invoices</router-link>
             </li>
           </ul>
         </aside>
       </div>
     </div>
-    <div class="w-full p-3 m-8 overflow-y-aut bg-white">
-      <div class="flex p-40">
+    <div class="w-full p-3 m-8 bg-white">
+      <div>
         <router-view></router-view>
       </div>
     </div>

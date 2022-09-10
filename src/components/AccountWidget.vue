@@ -19,7 +19,7 @@
       </p>
       <button
         v-if="store.account != ''"
-        class="button-account mt-1"
+        class="button-account mt-1 px-2 py-1"
         @click="disconnectAccount"
       >
         disconnect

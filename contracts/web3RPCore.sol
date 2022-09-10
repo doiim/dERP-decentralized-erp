@@ -37,13 +37,14 @@ contract Web3RPCore is ERC1155, Ownable {
     function createItem(
         uint256[] calldata _tokenIds,
         uint256[] calldata _tokenAmounts,
-        string calldata _url
+        string calldata _uri
     ) external onlyOwner  {
         require(_tokenAmounts.length == _tokenIds.length, "TokenIds and amounts array should be same size.");
         recipeInputLength[itemsLength] = _tokenIds.length;
         recipeInputTokenIds[itemsLength] = _tokenIds;
         recipeInputAmounts[itemsLength] = _tokenAmounts;
-        _uris[itemsLength] = _url;
+        _uris[itemsLength] = _uri;
+        emit ItemCreated(itemsLength, _uri);
         itemsLength++;
     }
 

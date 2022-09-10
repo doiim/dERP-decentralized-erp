@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-screen w-full">
+  <div class="flex items-center justify-center">
     <button
       v-if="store.account == ''"
       class="button-account"
@@ -61,18 +61,3 @@
     },
   }
 </script>
-
-<style scoped>
-  .button-account {
-    @apply bg-black text-white p-2 rounded-3xl shadow;
-  }
-  /* .top-left {
-    top: 0px;
-    left: 0px;
-  }
-  .top-right {
-    top: 0px;
-    right: 0px;
-    width: 300px;
-  } */
-</style>

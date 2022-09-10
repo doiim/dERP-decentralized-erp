@@ -13,7 +13,7 @@
               <router-link to="/inventory">Inventory</router-link>
             </li>
             <li class="my-1">
-              <router-link to="/invoice">Invoices</router-link>
+              <router-link to="/invoice">Invoice</router-link>
             </li>
           </ul>
         </aside>

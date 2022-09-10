@@ -15,14 +15,14 @@
             <li class="my-1">
               <router-link to="/">Home</router-link>
             </li>
-            <li class="my-1">
+            <!-- <li class="my-1">
               <router-link to="/itens">Itens</router-link>
+            </li> -->
+            <li class="my-1">
+              <router-link to="/inventory">Inventory</router-link>
             </li>
             <li class="my-1">
               <router-link to="/recipes">Recipes</router-link>
-            </li>
-            <li class="my-1">
-              <router-link to="/inventory">Inventory</router-link>
             </li>
             <li class="my-1">
               <router-link to="/invoice">Invoice</router-link>

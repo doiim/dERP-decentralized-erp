@@ -15,7 +15,7 @@
     </p>
     <p class="text-center py-3 font-bold">Therefore... welcome to web3RP!</p>
 
-    <p class="text-center py-1">
+    <!-- <p class="text-center py-1">
       Forget about Microsoft / SAP / Oracle selling atrocious Dynamics /
       Business ByDesign / Fusion licenses for thousands of dollars per user a
       year.
@@ -29,7 +29,7 @@
     <p class="text-center py-1">
       Decentralized Resource Planning application for people to nurture their
       work routine.
-    </p>
+    </p> -->
   </div>
 
   <div

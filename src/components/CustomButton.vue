@@ -10,7 +10,7 @@
 
 <style scoped>
     .button-base {
-        @apply bg-black px-1 pb-1 rounded-3xl relative shadow;
+        @apply bg-dark-teal px-1 pb-1 rounded-3xl relative shadow;
         width: 100%;
     }
     .button-base:before {

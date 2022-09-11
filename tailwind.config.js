@@ -20,6 +20,10 @@ module.exports = {
       'orange': '#C39E6B',
       'yellow': '#D5CBA6',
       'white': '#FEFEFE',
+      'teal': '#0D9488',
+      'dark-teal': '#115E59',
+      'grey': '#F3F4F6',
+      'dark-grey': '#1F2937'
     },
     spacing: {
       '1': '8px',
@@ -44,8 +48,8 @@ module.exports = {
       '7xl': '5rem',
     },
     fontFamily: {
-      'sans': ['Jura'],
-      'header': ['Jura']
+      'sans': ['Inter'],
+      'header': ['Inter']
     },
     extend: {},
   },

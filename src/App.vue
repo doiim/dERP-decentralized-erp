@@ -1,19 +1,22 @@
 <template>
   <div class="flex">
-    <div class="sidebar flex flex-col h-screen px-2 py-8 overflow-y-auto border-r">
-      <h3 class="normal-case">web3RP</h3>
+    <div class="sidebar flex flex-col h-screen px-2 py-8 overflow-y-auto bg-teal">
+      <img src="./assets/logonew.png" class="mx-1 my-3" style="width: 150px">
       <div class="mt-4">
         <AccountWidget />
       </div>
-      <Transition>
+    <Transition>
       <div v-if="erpStore.ownedERP" class="flex flex-col justify-between mt-6">
         <aside>
           <ul>
-            <li class="my-1">
-              <router-link to="/inventory">Inventory</router-link>
+            <li class="my-1 hover:bg-dark-teal hover:rounded py-1 px-2">
+              <router-link to="/" class="text-white no-underline">Home</router-link>
             </li>
-            <li class="my-1">
-              <router-link to="/invoice">Invoice</router-link>
+            <li class="my-1 hover:bg-dark-teal hover:rounded py-1 px-2">
+              <router-link to="/inventory" class="text-white no-underline">Inventory</router-link>
+            </li>
+            <li class="my-1 hover:bg-dark-teal hover:rounded py-1 px-2">
+              <router-link to="/invoice" class="text-white no-underline">Invoice</router-link>
             </li>
             <li class="my-1">
               <router-link to="/invoice">About</router-link>
@@ -23,7 +26,7 @@
       </div>
       </Transition>
     </div>
-    <div class="w-full p-3 m-8 bg-white">
+    <div class="w-full p-3 px-4">
       <div>
         <router-view></router-view>
       </div>

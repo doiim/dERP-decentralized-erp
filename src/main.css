@@ -44,10 +44,10 @@
         box-shadow: 0px 0px 40px 6px #00ffa2;
     }
     .button-account {
-        @apply bg-black text-white p-2 rounded-3xl shadow;
+        @apply bg-teal text-white p-2 rounded shadow;
     }
     .button-account:hover {
-        @apply text-dark-green;
+        @apply text-grey;
     }
 }
 

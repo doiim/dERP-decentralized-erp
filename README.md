@@ -29,6 +29,7 @@ inventory;
 accounting;
 human resources;
 customer relationship.
+
 Food donation (restaurant, supermarket, catering, bakery, delicatessen, etc.)
 
 Brazil's current sanitary and health policies made very hard for food donation and we want to use blockchain to bind to actors that now are not engaging to each other.

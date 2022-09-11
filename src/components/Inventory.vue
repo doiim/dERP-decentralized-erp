@@ -3,56 +3,44 @@
     <h1>Inventory</h1>
     <button
       v-if="!showAddItem"
-      class="bg-dark-green rounded px-2 py-1 drop-shadow"
+      class="bg-teal rounded px-2 py-1 drop-shadow"
       @click="showAddItem = true"
     >
       New Item
     </button>
-    <h3 v-if="showAddItem" class="flex-grow">Add Item</h3>
-    <Transition>
-      <div v-if="showAddItem" class="flex flex-row">
-        <img v-if="!newItemImage" 
-          src="./../assets/upload-image.png"
-          :style="{ 'height': '120px', 'width': '120px' }"
-          class="rounded-full border-2 border-dark-green m-3"
-
-        />
-        <div>
-          <form class="my-1">
-            <div>Item Name:</div>
-            <input type="text" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1" placeholder="Name" /><br/>
-            <div>Item Description:</div>
-            <input type="text" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1" placeholder="Description" />
-          </form>
-          <button @click="showAddItem = false">Cancel</button>
-          <button
-            class="bg-dark-green rounded px-2 py-1 drop-shadow"
-            @click="addItem"
-          >
-            Add
-          </button>
-        </div>
-        <div class="flex-grow">
-
-        </div>
-    </div>
+    <Transition name="fade">
+      <AddItem v-if="showAddItem" @closeAdd="closeAdd"></AddItem>
     </Transition>
-    <table class="table-fixed mt-6">
+    <table v-if="!showAddItem" class="table-fixed mt-6">
       <thead>
         <tr>
-          <th>Picture</th>
-          <th>Name</th>
-          <th>Description</th>
+          <th></th>
+          <th class="text-start">Name</th>
+          <th class="text-start">Balance</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in inventory">
-          <td>PIC</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.description }}</td>
+          <td>
+            <img
+              v-if="item.image"
+              :src="item.image"
+              :style="{ 'height': '50px', 'width': '50px' }"
+              class="cursor-pointer rounded-full border-2 border-teal"
+            />
+          </td>
+          <td>
+            <span v-if="item.name">{{item.id}}. {{ item.name }}</span>
+            <span v-if="!item.name">...</span>
+          </td>
+          <td>
+            <span v-if="item.quantity">{{ item.quantity }}</span>
+            <span v-if="!item.quantity">0</span>
+          </td>
           <td colspan="3">
             <button
-              class="bg-dark-green rounded px-2 py-1 drop-shadow"
+              class="bg-teal rounded px-2 py-1 drop-shadow"
+              :disabled="item.modify < 1"
               @click="decreaseCounter(item.id)"
             >
               -
@@ -61,12 +49,12 @@
               class="mx-2 text-center"
               style="width: 50px"
               type="number"
-              :value="item.quantity"
+              :value="item.modify"
               step="1"
-              @input="updateCounter($event, item.id)"
+              @input="updateCounter($event, item.modify)"
             />
             <button
-              class="bg-dark-green rounded px-2 py-1 drop-shadow"
+              class="bg-teal rounded px-2 py-1 drop-shadow"
               @click="increaseCounter(item.id)"
             >
               +
@@ -76,55 +64,85 @@
       </tbody>
     </table>
     <button
-      class="bg-dark-green rounded px-2 py-1 drop-shadow mt-1"
+      v-if="!showAddItem"
+      class="bg-teal rounded px-2 py-1 drop-shadow mt-1"
       @click="saveInventory"
     >
-      Save Inventory
+      Commit Inventory
     </button>
   </div>
 </template>
 
 <script>
   import { inject } from 'vue'
+  import { ethers } from 'ethers'
 
   import { useAccountStore } from '../stores/account'
+  import { useERPStore } from '../stores/erp'
+  import erpArtifact from '../../artifacts/contracts/web3RPCore.sol/Web3RPCore.json'
 
-  import ImageComponent from './ImageComponent.vue'
+  import AddItem from './AddItem.vue'
 
   export default {
     setup() {
-      const store = useAccountStore()
+      const accountStore = useAccountStore()
+      const erpStore = useERPStore()
       const getWalletSigner = inject('getWalletSigner')
-      return { store, getWalletSigner }
+      const getIPFS = inject('getIPFS')
+      return { accountStore, erpStore, getWalletSigner, getIPFS }
+    },
+    mounted() {
+      this.refreshInventory()
     },
     data() {
       return {
         newItemImage: '',
-        inventory: [
-          { id: 1, name: 'test', description: 'hello', quantity: 66 },
-          { id: 2, name: 'test 2', description: 'hello', quantity: 24 },
-          { id: 3, name: 'test 3', description: 'hello', quantity: 87 },
-        ],
+        inventory: [],
         showAddItem: false,
       }
     },
-    components: {ImageComponent},
+    components: {AddItem},
     watch: {},
     methods: {
+      refreshInventory: async function() {
+        const erpContract = new ethers.Contract(
+            this.erpStore.ownedERP,
+            erpArtifact.abi,
+            this.getWalletSigner(),
+        )
+        const filter = await erpContract.filters.ItemCreated(
+          null,
+          null,
+        )
+        const events = await erpContract.queryFilter(filter)
+        const inventory = []
+        for (const e of events) {
+          fetch(this.getIPFS(e.args.uri))
+          .then(a => a.json())
+          .then(b => this.setMetadataInfo(e.args.tokenId, b))
+          const balance = (await erpContract.balanceOf(this.erpStore.ownedERP, e.args.tokenId)).toNumber()
+          const formatted = {
+            id: e.args.tokenId,
+            quantity: balance,
+            modify: 0,
+          }
+          inventory.push(formatted)
+        }
+        this.inventory = inventory
+      },
+      setMetadataInfo: async function (tokenId, metadata) {
+        const item = this.inventory.find(i => i.id == tokenId)
+        item.name = metadata.name
+        item.description = metadata.description
+        item.image = metadata.image
+      },
       increaseCounter: function (itemID) {
-        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
-        if (objIndex == null) return
-        const newObj = { ...this.inventory[objIndex] }
-        newObj.quantity += 1
-        this.inventory.splice(objIndex, 1, newObj)
+        const objIndex = this.inventory.find((obj) => obj.id == itemID)
+        objIndex.modify++
       },
       decreaseCounter: function (itemID) {
-        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
-        if (objIndex == null) return
-        const newObj = { ...this.inventory[objIndex] }
-        newObj.quantity -= 1
-        if (newObj.quantity < 0) return
-        this.inventory.splice(objIndex, 1, newObj)
+        const objIndex = this.inventory.find((obj) => obj.id == itemID)
+        objIndex.modify--
       },
       updateCounter: function (event, itemID) {
         const value = parseInt(event.target.value)
@@ -135,12 +153,25 @@
         newObj.quantity = value
         this.inventory.splice(objIndex, 1, newObj)
       },
-      addItem: async function () {
-        console.log('addItem')
-      },
       saveInventory: async function () {
-        console.log('saveInventory', this.inventory)
+        const ids = []
+        const amounts = []
+        this.inventory.filter(i => i.modify > 0).forEach(element => {
+          ids.push(element.id)
+          amounts.push(element.modify)
+        })
+        const erpContract = new ethers.Contract(
+            this.erpStore.ownedERP,
+            erpArtifact.abi,
+            this.getWalletSigner(),
+        )
+        const transaction = await erpContract.mintBatchInventory(ids, amounts)
+        await transaction.wait()
+        this.refreshInventory()
       },
+      closeAdd: function () {
+        this.showAddItem = false
+      }
     },
   }
 </script>

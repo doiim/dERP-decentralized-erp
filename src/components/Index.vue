@@ -89,7 +89,6 @@
     },
     methods: {
       async refreshERP() {
-        // The Contract object
         const erpContract = new ethers.Contract(
           localhostAddresses.web3rp,
           erpFactoryArtifact.abi,

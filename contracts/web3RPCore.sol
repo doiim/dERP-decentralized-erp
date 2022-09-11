@@ -2,13 +2,14 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface ERPCore {
     function mintReward(address to, bytes32[] memory vouchers) external;
 }
 
-contract Web3RPCore is ERC1155, Ownable {
+contract Web3RPCore is Ownable, ERC1155, ERC1155Holder {
 
     event ItemCreated(uint256 indexed tokenId, string uri); 
     event PurchaseOrder(string proof);
@@ -26,8 +27,9 @@ contract Web3RPCore is ERC1155, Ownable {
     mapping(uint256 => uint256[]) private recipeInputTokenIds;    // TokenIDs to be deducted
     mapping(uint256 => uint256[]) private recipeInputAmounts;     // Recipt Token amounts to deduct
 
-    constructor(address _factory) ERC1155("") Ownable() {
+    constructor(address _factory, address _owner) ERC1155("") Ownable() {
         factory = ERPCore(_factory);
+        transferOwnership(_owner);
     }
 
     function uri(uint256 _uri) public view virtual override returns (string memory) {
@@ -96,6 +98,10 @@ contract Web3RPCore is ERC1155, Ownable {
             vouchers[i] = uniqueVoucher;
         }
         factory.mintReward(msg.sender, vouchers);
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, ERC1155Receiver) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 
 }

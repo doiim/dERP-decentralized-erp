@@ -13,12 +13,12 @@ export default {
         // Add/Switch to testnet
         const networkData = [
           {
-            chainId: '0x7a69',
-            chainName: 'Local Testnet',
-            rpcUrls: ['http://127.0.0.1:8545/'],
+            chainId: '0x13881',
+            chainName: 'Mumbai Testnet',
+            rpcUrls: ['https://polygon-mumbai.g.alchemy.com/v2/pbtdm5Gprn7pg5gxycoUpDyMgeltREc8'],
             nativeCurrency: {
-              name: 'Ethereum',
-              symbol: 'ETH',
+              name: 'Matic',
+              symbol: 'MATIC',
               decimals: 18,
             },
           },
@@ -29,10 +29,6 @@ export default {
           params: networkData,
         })
 
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x7a69' }],
-        })
         // A Web3Provider wraps a standard Web3 provider, which is
         // what MetaMask injects as window.ethereum into each page
         provider = new ethers.providers.Web3Provider(window.ethereum)

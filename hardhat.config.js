@@ -1,7 +1,14 @@
 require("@nomiclabs/hardhat-waffle");
-//const fs = require('fs');
+const fs = require('fs');
 
-// const apiGoerli = fs.readFileSync(".api.goerli").toString().trim();
+let apiMumbai, seedMumbai
+
+try{
+  apiMumbai = fs.readFileSync(".api.mumbai").toString().trim();
+  seedMumbai = fs.readFileSync(".seed.mumbai").toString().trim();
+} catch (err) {
+  console.log('Error fetching seeds')
+}
 
 module.exports = {
   solidity: "0.8.9",
@@ -9,12 +16,12 @@ module.exports = {
     hardhat: {
       blockGasLimit: 30000000,
     },
-    // goerli: {
-    //   url: apiGoerli,
-    //   accounts: {
-    //     mnemonic: seedGoerli,
-    //     count: 1
-    //   }
-    // }
+    mumbai: {
+      url: apiMumbai,
+      accounts: {
+        mnemonic: seedMumbai,
+        count: 1
+      }
+    }
   }
 };

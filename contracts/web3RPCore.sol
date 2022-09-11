@@ -57,10 +57,7 @@ contract Web3RPCore is Ownable, ERC1155, ERC1155Holder {
         require(_tokenAmounts.length == _tokenIds.length, "TokenIds and Amounts array should be same size.");
         uint256 itemsSize = _tokenIds.length;
         for (uint256 id = 0; id < itemsSize; id++) {
-            uint256 recipeLength = recipeInputLength[_tokenIds[id]];
-            for (uint256 deductId = 0; deductId < recipeLength; deductId++) {
-                _burnBatch(address(this), recipeInputTokenIds[deductId], recipeInputAmounts[deductId]);
-            }
+            _burnBatch(address(this), recipeInputTokenIds[_tokenIds[id]], recipeInputAmounts[_tokenIds[id]]);
         }
         _mintBatch(address(this), _tokenIds, _tokenAmounts, "");
     }
@@ -92,8 +89,8 @@ contract Web3RPCore is Ownable, ERC1155, ERC1155Holder {
         _burnBatch(address(this), _tokenIds, _tokenAmounts);
         emit InvoiceOrder(_uri);
         bytes32 uniqueVoucher = 0x0000000000000000000000000000000000000000000000000000000000000000;
-        bytes32[] memory vouchers = new bytes32[](1);
         uint256 idsLength = _tokenAmounts.length;
+        bytes32[] memory vouchers = new bytes32[](idsLength);
         for(uint256 i=0; i<idsLength; i++){
             vouchers[i] = uniqueVoucher;
         }

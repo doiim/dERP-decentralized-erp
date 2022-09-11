@@ -55,6 +55,10 @@
     .button-default:hover {
         @apply text-grey;
     }
+
+    .button-default:disabled {
+        @apply text-grey opacity-20;
+    }
 }
 
 .input-add-item {

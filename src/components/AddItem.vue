@@ -6,22 +6,51 @@
             <img v-if="!newItemImage" 
             src="./../assets/upload-image.png"
             :style="{ 'height': '120px', 'width': '120px' }"
-            class="cursor-pointer rounded-full border-2 border-dark-green m-3"
+            class="cursor-pointer rounded-full border-2 border-teal m-3"
             @click="this.$refs.file.click()"
             />
             <img v-if="newItemImage" 
             :src="newItemImage"
             :style="{ 'height': '120px', 'width': '120px' }"
-            class="cursor-pointer rounded-full border-2 border-dark-green m-3"
+            class="cursor-pointer rounded-full border-2 border-teal m-3"
             @click="this.$refs.file.click()"
             />
             <div class="flex-grow">
             <form class="my-1">
                 <div>Item Name:</div>
-                <input type="text" @change="event => this.newName = event.target.value" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1 input-add-item" placeholder="Name" /><br/>
+                <input type="text" @change="event => this.newName = event.target.value" class="bg-white border-2 border-teal text-black rounded px-2 py-1 input-add-item" placeholder="Name" /><br/>
                 <div>Item Description:</div>
-                <input type="text"  @change="event => this.newDescription = event.target.value" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1 input-add-item" placeholder="Description" />
+                <input type="text"  @change="event => this.newDescription = event.target.value" class="bg-white border-2 border-teal text-black rounded px-2 py-1 input-add-item" placeholder="Description" />
             </form>
+            <table v-if="inventory.length > 0" class="w-100">
+                <thead>
+                    <tr>
+                    <th class="text-start">Item</th>
+                    <th class="text-start">Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in inventory">
+                    <td>
+                        <span v-if="item.name">{{item.id}}. {{ item.name }}</span>
+                        <span v-if="!item.name">{{item.id}}. ...</span>
+                    </td>
+                    <td>
+                        <button class="button-default" :disabled="amounts[item.id] < 1" @click="amounts[item.id]--">
+                            -
+                        </button>
+                        <input
+                            class="mx-2 text-center"
+                            style="width: 50px"
+                            type="number"
+                            :value="amounts[item.id]"
+                            step="1"
+                        />
+                        <button class="button-default" @click="amounts[item.id]++">+</button>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
             <button @click="closeAdd" class="button-default mr-2">Cancel</button>
             <button
                 class='button-default'
@@ -54,10 +83,15 @@
     data() {
         return {
         waiting: false,
+        amounts:[],
         newItemImage: '',
         newName: '',
         newDescription: ''
         }
+    },
+    props: ['inventory'],
+    mounted() {
+        this.amounts = this.inventory.map( i => 0)
     },
     components: {},
     watch: {},
@@ -73,7 +107,11 @@
                 erpArtifact.abi,
                 this.getWalletSigner(),
             )
-            const transaction = await erpContract.createItem([],[],itemUri)
+            const itemInputs = this.inventory.filter((i, idx) => this.amounts[idx] > 0).map(i => i.id.toNumber())
+            const amountsInputs = this.amounts.filter((i) => i > 0)
+            console.log('ITEMS', itemInputs)
+            console.log('AMOUNTS', amountsInputs)
+            const transaction = await erpContract.createItem(itemInputs,amountsInputs,itemUri)
             this.waiting = true
             await transaction.wait()
             this.waiting = false

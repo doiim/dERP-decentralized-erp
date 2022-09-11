@@ -1,22 +1,23 @@
 <template>
-  <div class="grid">
+  <div class="flex flex-col">
     <h1>Inventory</h1>
     <button
       v-if="!showAddItem"
-      class="bg-teal rounded px-2 py-1 drop-shadow"
+      class="button-default"
       @click="showAddItem = true"
     >
       New Item
     </button>
     <Transition name="fade">
-      <AddItem v-if="showAddItem" @closeAdd="closeAdd"></AddItem>
+      <AddItem v-if="showAddItem" @closeAdd="closeAdd" :inventory="inventory"></AddItem>
     </Transition>
     <table v-if="!showAddItem" class="table-fixed mt-6">
       <thead>
         <tr>
           <th></th>
           <th class="text-start">Name</th>
-          <th class="text-start">Balance</th>
+          <th class="text-start">Quantity</th>
+          <th class="text-start">Increment</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +32,7 @@
           </td>
           <td>
             <span v-if="item.name">{{item.id}}. {{ item.name }}</span>
-            <span v-if="!item.name">...</span>
+            <span v-if="!item.name">{{item.id}}. ...</span>
           </td>
           <td>
             <span v-if="item.quantity">{{ item.quantity }}</span>
@@ -39,7 +40,7 @@
           </td>
           <td colspan="3">
             <button
-              class="bg-teal rounded px-2 py-1 drop-shadow"
+              class="button-default"
               :disabled="item.modify < 1"
               @click="decreaseCounter(item.id)"
             >
@@ -54,7 +55,7 @@
               @input="updateCounter($event, item.modify)"
             />
             <button
-              class="bg-teal rounded px-2 py-1 drop-shadow"
+              class="button-default"
               @click="increaseCounter(item.id)"
             >
               +
@@ -65,7 +66,7 @@
     </table>
     <button
       v-if="!showAddItem"
-      class="bg-teal rounded px-2 py-1 drop-shadow mt-1"
+      class="button-default mt-2"
       @click="saveInventory"
     >
       Commit Inventory
@@ -147,11 +148,8 @@
       updateCounter: function (event, itemID) {
         const value = parseInt(event.target.value)
         if(value < 0) return
-        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
-        if (objIndex == null) return
-        const newObj = { ...this.inventory[objIndex] }
-        newObj.quantity = value
-        this.inventory.splice(objIndex, 1, newObj)
+        const item = this.inventory.find((obj) => obj.id == itemID)
+        item.modify = value
       },
       saveInventory: async function () {
         const ids = []

@@ -1,15 +1,50 @@
 <template>
-  <div v-if="!waiting"><AccountWidget /></div>
-  <div v-if="waiting">wait...</div>
-  <div class="my-4" v-if="!waiting && accountStore.account && !erpStore.ownedERP">
-    <CustomButton
-      @click="deployERP"
-    >
-      Deploy Your Own web3RP
-    </CustomButton>
+  <div class="text-center" v-if="!accountStore.account">
+    <h2 class="mb-4 mt-2">
+      Imagine a ERP, or Enterprise Resource Planning, without the E
+    </h2>
+    <p class="text-center py-1">
+      I mean, replace the profit-oriented centralized organization for a DAO
+      taking care of it.
+    </p>
+
+    <p class="text-center py-1">
+      And isn't it the case that web 3.0 describes the decentralized world we
+      may be able to build upon for the next generations of our full-immersive
+      digital society?
+    </p>
+    <p class="text-center py-3 font-bold">Therefore... welcome to web3RP!</p>
+
+    <p class="text-center py-1">
+      Forget about Microsoft / SAP / Oracle selling atrocious Dynamics /
+      Business ByDesign / Fusion licenses for thousands of dollars per user a
+      year.
+    </p>
+
+    <p class="text-center py-1">
+      Get a real helper to streamline your business of any size or kind as fast
+      as a couple of clicks...
+    </p>
+
+    <p class="text-center py-1">
+      Decentralized Resource Planning application for people to nurture their
+      work routine.
+    </p>
+  </div>
+
+  <div class="my-6">
+    <div v-if="!waiting"><AccountWidget /></div>
+    <div v-if="waiting">wait...</div>
+  </div>
+
+  <div
+    class="my-4"
+    v-if="!waiting && accountStore.account && !erpStore.ownedERP"
+  >
+    <CustomButton @click="deployERP"> Deploy Your Own web3RP </CustomButton>
   </div>
   <div v-if="!waiting && accountStore.account && erpStore.ownedERP">
-    Your ERP is deployed at {{erpStore.ownedERP}}
+    Your ERP is deployed at {{ erpStore.ownedERP }}
   </div>
 </template>
 
@@ -22,8 +57,8 @@
   import AccountWidget from './AccountWidget.vue'
   import CustomButton from './CustomButton.vue'
 
-  import localhostAddresses from '../../deploys/localhost.json';
-  import erpFactoryArtifact from '../../artifacts/contracts/web3RPFactory.sol/Web3RPFactory.json';
+  import localhostAddresses from '../../deploys/localhost.json'
+  import erpFactoryArtifact from '../../artifacts/contracts/web3RPFactory.sol/Web3RPFactory.json'
 
   export default {
     setup() {
@@ -36,30 +71,33 @@
     data() {
       return {
         temp: false,
-        waiting: false
+        waiting: false,
       }
     },
-    components: { AccountWidget, CustomButton},
+    components: { AccountWidget, CustomButton },
     watch: {
       // Whenever account changes, this function will run
       async 'accountStore.account'(account) {
         if (account) {
           this.refreshERP()
         }
-      }
+      },
     },
     methods: {
       async refreshERP() {
         // The Contract object
         const erpContract = new ethers.Contract(
-            localhostAddresses.web3rp,
-            erpFactoryArtifact.abi,
-            this.getWalletSigner()
-        );
+          localhostAddresses.web3rp,
+          erpFactoryArtifact.abi,
+          this.getWalletSigner(),
+        )
         this.waiting = true
-        const filter = await erpContract.filters.ERPDeployed(this.getWalletAccount(), null)
-        const events = await erpContract.queryFilter(filter);
-        if (events.length > 0){
+        const filter = await erpContract.filters.ERPDeployed(
+          this.getWalletAccount(),
+          null,
+        )
+        const events = await erpContract.queryFilter(filter)
+        if (events.length > 0) {
           console.log(events[0].args.erp)
           this.erpStore.setERP(events[0].args.erp)
         }
@@ -69,10 +107,10 @@
       async deployERP() {
         // The Contract object
         const erpContract = new ethers.Contract(
-            localhostAddresses.web3rp,
-            erpFactoryArtifact.abi,
-            this.getWalletSigner()
-        );
+          localhostAddresses.web3rp,
+          erpFactoryArtifact.abi,
+          this.getWalletSigner(),
+        )
         const transaction = await erpContract.deployERP()
         this.waiting = true
         await transaction.wait()

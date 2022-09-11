@@ -59,7 +59,7 @@ On maniiva.com there is no pre mine and no investors holding tokens, it’s fund
 
 By holding it you can vote on the DAO’s decision, elect management counsel that conduct day to day operations without creating a governance overhead for every small decision, leaving only the major things to be decided by the token holders. 'Hodling' the token earn dividends from it’s operation, and in case you are in disagreement with the projects progress you can redeem your pro-rata share of the DAO’s treasury any time you want.
 
-# Which United Nations SDGs are we engaged with?
+## Which United Nations SDGs are we engaged with?
 
 #2  End hunger, achieve food security and improved nutrition and promote sustainable agriculture
 
@@ -71,7 +71,6 @@ By holding it you can vote on the DAO’s decision, elect management counsel tha
 
 #17  Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.
 
-
-# Benchmarking ⤵
+## Benchmarking ⤵
 
 https://coda.io/use-cases

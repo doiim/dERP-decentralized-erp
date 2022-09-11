@@ -13,9 +13,9 @@
       }}
     </button> -->
     <div>
-      <p v-if="store.account != ''">
-        Hello there <strong>{{ store.account }}</strong
-        >!
+      <p v-if="store.account != ''"><strong>
+        {{store.account.substring(0,6)}}...{{store.account.substring(store.account.length-4,store.account.length)}}
+      </strong>
       </p>
       <button
         v-if="store.account != ''"
@@ -30,15 +30,17 @@
 
 <script>
   import { inject } from 'vue'
+  import { useERPStore } from '../stores/erp'
   import { useAccountStore } from '../stores/account'
 
   export default {
     setup() {
       const store = useAccountStore()
+      const erpStore = useERPStore()
       const connectWallet = inject('connectWallet')
       const getWalletAccount = inject('getWalletAccount')
       const disconnectWallet = inject('disconnectWallet')
-      return { store, connectWallet, disconnectWallet, getWalletAccount }
+      return { store, erpStore, connectWallet, disconnectWallet, getWalletAccount }
     },
     methods: {
       connectAccount: async function (event) {
@@ -57,6 +59,7 @@
       disconnectAccount: async function (event) {
         await this.disconnectWallet()
         this.store.unsetAccount()
+        this.erpStore.clearERP()
       },
     },
   }

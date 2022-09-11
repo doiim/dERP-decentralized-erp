@@ -2,7 +2,7 @@
   <input type="file" @change="uploadFile" multiple="multiple" ref="file" />
   <button
     @click="handleSubmit"
-    class="bg-dark-green rounded mx-2 px-2 py-1 drop-shadow"
+    class="bg-dark-green border-black border-2 rounded mx-2 px-2 py-1 drop-shadow"
   >
     <span v-if="uploading">Uploading...</span><span v-else>Upload</span>
   </button>

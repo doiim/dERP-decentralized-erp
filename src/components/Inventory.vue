@@ -35,7 +35,10 @@
           <td>{{ item.name }}</td>
           <td>{{ item.description }}</td>
           <td colspan="3">
-            <button class="bg-dark-green rounded px-2 py-1 drop-shadow"  @click="decreaseCounter(item.id)">
+            <button
+              class="bg-dark-green rounded px-2 py-1 drop-shadow"
+              @click="decreaseCounter(item.id)"
+            >
               -
             </button>
             <input
@@ -44,8 +47,12 @@
               type="number"
               :value="item.quantity"
               step="1"
+              @input="updateCounter($event, item.id)"
             />
-            <button class="bg-dark-green rounded px-2 py-1 drop-shadow" @click="increaseCounter(item.id)">
+            <button
+              class="bg-dark-green rounded px-2 py-1 drop-shadow"
+              @click="increaseCounter(item.id)"
+            >
               +
             </button>
           </td>
@@ -87,18 +94,28 @@
     watch: {},
     methods: {
       increaseCounter: function (itemID) {
-        const objIndex = this.inventory.findIndex((obj => obj.id == itemID));
+        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
         if (objIndex == null) return
-        const newObj = {...this.inventory[objIndex]};
+        const newObj = { ...this.inventory[objIndex] }
         newObj.quantity += 1
-        this.inventory.splice(objIndex, 1, newObj);
+        this.inventory.splice(objIndex, 1, newObj)
       },
       decreaseCounter: function (itemID) {
-        const objIndex = this.inventory.findIndex((obj => obj.id == itemID));
+        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
         if (objIndex == null) return
-        const newObj = {...this.inventory[objIndex]};
+        const newObj = { ...this.inventory[objIndex] }
         newObj.quantity -= 1
-        this.inventory.splice(objIndex, 1, newObj);
+        if (newObj.quantity < 0) return
+        this.inventory.splice(objIndex, 1, newObj)
+      },
+      updateCounter: function (event, itemID) {
+        const value = parseInt(event.target.value)
+        if(value < 0) return
+        const objIndex = this.inventory.findIndex((obj) => obj.id == itemID)
+        if (objIndex == null) return
+        const newObj = { ...this.inventory[objIndex] }
+        newObj.quantity = value
+        this.inventory.splice(objIndex, 1, newObj)
       },
       addItem: async function () {
         console.log('addItem')

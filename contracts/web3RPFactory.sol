@@ -15,7 +15,7 @@ contract Web3RPFactory {
     }
 
     function deployERP() external {
-        Web3RPCore erp = new Web3RPCore(address(this));
+        Web3RPCore erp = new Web3RPCore(address(this), msg.sender);
         emit ERPDeployed(msg.sender, address(erp));
     }
 

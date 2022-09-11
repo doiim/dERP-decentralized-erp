@@ -9,31 +9,26 @@ export default {
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDA4MUMyMjNGNkYxODBGZTkyRUM4ODA0MEIzNjc5NjRGMmFjNjI1MTgiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjI4MzIxODgyNjQsIm5hbWUiOiJ3ZWIzUlAifQ.ng7M5CrwIDjUNtXuOzsLYLZ_ucMwBUIEV-IRqwccnOk',
     })
 
-    const addIpfs = async () => {
-        if (!this.files.length || this.uploading) return
-        this.uploaded = []
-        const cid = await storageClient.put(this.files)
+    const addFileIPFS = async (files) => {
+        const cid = await storageClient.put(files)
+        const filename = cid + '/' + files[0].name
+        return filename
+    }
+
+    const addMetadataIPFS = async (jsonObject) => {
+        var blob = new Blob([JSON.stringify(jsonObject)], {type: "application/json"});
+        var file = new File([blob], "metadata.json");
+        const cid = await storageClient.put([file])
+        return cid + '/metadata.json'
+    }
+
+    const getIPFS = (cid) => {
         const gateway = 'https://ipfs.eth.aragon.network/ipfs/'
-        for (let i = 0; i < this.files.length; i++) {
-          const file = this.files.item(i)
-          this.uploaded.push(gateway + cid + '/' + file.name)
-        }
-        return this.uploaded
-      } catch (err) {
-        return { error: 'Error uploading file to IPFS!' }
-      }
+        return gateway+cid
     }
 
-    const getIpfs = async () => {
-
-    }
-
-    const getWalletProvider = () => provider
-
-    app.provide('connectWallet', connect)
-    app.provide('disconnectWallet', disconnect)
-    app.provide('getWalletProvider', getWalletProvider)
-    app.provide('getWalletSigner', getWalletSigner)
-    app.provide('getWalletAccount', getWalletAccount)
+    app.provide('addFileIPFS', addFileIPFS)
+    app.provide('addMetadataIPFS', addMetadataIPFS)
+    app.provide('getIPFS', getIPFS)
   },
 }

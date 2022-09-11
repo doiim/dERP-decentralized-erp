@@ -7,6 +7,7 @@ import Inventory from './components/Inventory.vue'
 import Invoice from './components/Invoice.vue'
 import './main.css'
 import ConnectionPlugin from './plugins/connectionPlugin'
+import IPFSPlugin from './plugins/ipfsPlugin'
 
 const pinia = createPinia()
 
@@ -20,4 +21,4 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(ConnectionPlugin).use(pinia).use(router).mount('#app')
+createApp(App).use(ConnectionPlugin).use(IPFSPlugin).use(pinia).use(router).mount('#app')

@@ -48,6 +48,18 @@
     .button-account:hover {
         @apply text-grey;
     }
+
+    .button-default {
+        @apply bg-teal text-white p-2 rounded shadow;
+    }
+    .button-default:hover {
+        @apply text-grey;
+    }
+}
+
+.input-add-item {
+    width: 100%;
+    max-width: 400px;
 }
 
 .main-container {
@@ -68,4 +80,14 @@
 .v-leave-to {
   opacity: 0px;
   transform: translate(-100px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

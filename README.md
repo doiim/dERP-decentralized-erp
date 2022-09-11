@@ -1,55 +1,76 @@
 # web3RP
 
-Imagine a ERP, or Enterprise Resource Planning, without the E.
+Imagine an ERP, or Enterprise Resource Planning, without the E.
 
-I mean, replace the business-oriented centralized organization for a DAO taking care of it. 
 
-And isn't the case that web 3.0 describes the decentralized world we may be able to build upon the next generations of our full-immersive-digital-society?
+Replace the profit-oriented centralized organization for a DAO taking care of it.
 
-Therefore... welcome to web3RP!
+web3 describes the decentralized world we will build upon for the next generations of our full-immersive digital society
 
-## Installation
+welcome to web3RP!
 
-To install and compile smart contracts:
-```
-npm install
-npx hardhat compile
-```
-Then run a local node in a separated terminal
-```
-npx hardhat node
-```
-And at last, deploy contract to local node and run the server
-```
-npx hardhat run --network localhost scripts/1-deploy-web3RP.js
-npm run dev
-```
+Forget about Microsoft / SAP / Oracle selling atrocious Dynamics / Business ByDesign / Fusion licenses for thousands of dollars per user a year.
 
-## Running the first test
+Get a real helper to streamline your business of any size or kind as fast as a couple of clicks...
 
-For this implementation we made a simple integration with Metamask. So, before click Connect Wallet it is important to have it configured with at least one key provided by the hardhat node. Use the [Import Wallet](https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-account) feature of Metamask to load one of the following private-keys:
+Decentralized Resource Planning application for people to nurture their work routine.
 
-<span style="color:red"> 🔴 BE AWARE THAT THESE KEYS ARE PUBLIC. DO NOT USE THEM FOR PERSONAL PURPOSES OR ON PUBLIC NETWORKS. YOU COULD LOSE ALL YOUR FUNDS.</span>
-```
-Account #0: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+Modular or Plug & Play business management software
 
-Account #1: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
-Private Key: 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
-```
+MVP
 
-Once finished importing one of the accounts above you can connect them to the app. You will be prompted to switch to Localhost network (In case you aren't already). Just accept it.
+supply chain traceability;
+bookkeeping;
+ESG rewards.
+Roadmap
 
-In case you drop the node and start it again, it should be required to [reset the nonce of your account](https://metamask.zendesk.com/hc/en-us/articles/360015488891-How-to-reset-an-account). Do this in case you see the wrong nonce error on your browser console.  
+inventory;
+accounting;
+human resources;
+customer relationship.
+Food donation (restaurant, supermarket, catering, bakery, delicatessen, etc.)
 
-## References
+Brazil's current sanitary and health policies made very hard for food donation and we want to use blockchain to bind to actors that now are not engaging to each other.
 
-[doiim website](www.doiim.com)
+In our view, NGOs will provide QR codes to people facing food vulnerability, who will collect meals from previously registered donors. When the NGO issues a QR code, it receives an NFT ERC-721 and accumulates in its wallet.
 
-[Vite Docs](https://vitejs.dev/guide/)
+Each donated meal avoids food waste, reducing the amount of solid waste. Also, and most importantly, keeps one from feeling hungry.
 
-[Hardhat Docs](https://hardhat.org/docs)
+QR Codes will have their validation on-chain and generate ERC-20 tokens (rewards) which could be accumulated by the donors. Those tokens can be used as deductions for income taxes, with values calculated by the average of the current price of the consumer price index among foods.
 
-[Tailwind Docs](https://v2.tailwindcss.com/docs)
+NFTs accumulated by donors can be used in two ways:
 
-[Pinia Docs](https://pinia.vuejs.org/getting-started.html)
+Social recognition for being a sustainable company, in the form of collectible awards (badges);
+Commercializing to other companies that do not have a sustainable development agenda and want to compensate for their impact.
+Skin in the game🫀with glass walls
+
+Use case for NGOs so it's possible to better control and also give full disclosure of their ledger books.
+
+https://www.instagram.com/maniivaciente
+
+Vegan, paleo and raw. DAO connecting food growers, producers and consumers bridging the gap of nutrition and quantified self data. 0% gluten, 0% sugar, 0% salt, 0% soy 0% fry.
+Maniiva is a legally binding DAO that operates as a real world LLC. Using Ethereum for incorporation, governance and fundraising It is a legal entity that runs entirely on the blockchain. The owners of the company are it’s employees that receive compensation in cash and tokens representing equity in the LLC based on the amount of hours they work for it. 
+
+All of it is managed though the employees/token holders private keys on otoco.io ‘s dashboard, which is being built by us through doiim.com and can be used in most kinds of organizations worldwide. From the farm to the table, all the agentes in the supply chain gets compensated as the restaurant produces vegan, paleo and raw food. DAO connecting food growers, producers and consumers bridging the gap of nutrition and quantified self data. 0% gluten, 0% sugar, 0% salt, 0% soy 0% fry.
+
+On maniiva.com there is no pre mine and no investors holding tokens, it’s funding is initially granted by doiim.com as a donation for a social cause. Only Maniiva’s employees/contributors can be token holders, you can’t buy or trade it. You can only earn it though the effort of your work for the DAO. 
+
+By holding it you can vote on the DAO’s decision, elect management counsel that conduct day to day operations without creating a governance overhead for every small decision, leaving only the major things to be decided by the token holders. 'Hodling' the token earn dividends from it’s operation, and in case you are in disagreement with the projects progress you can redeem your pro-rata share of the DAO’s treasury any time you want.
+
+Which United Nations SDGs are we engaged with?
+
+#2  End hunger, achieve food security and improved nutrition and promote sustainable agriculture
+
+#8  Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all;
+
+#12  Ensure sustainable consumption and production patterns;
+
+#16  Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels;
+
+#17  Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.
+
+
+
+Benchmarking ⤵
+
+https://coda.io/use-cases

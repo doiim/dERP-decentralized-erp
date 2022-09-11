@@ -9,7 +9,11 @@
       New Item
     </button>
     <Transition name="fade">
-      <AddItem v-if="showAddItem" @closeAdd="closeAdd" :inventory="inventory"></AddItem>
+      <AddItem
+        v-if="showAddItem"
+        @closeAdd="closeAdd"
+        :inventory="inventory"
+      ></AddItem>
     </Transition>
     <table v-if="!showAddItem" class="table-fixed mt-6">
       <thead>
@@ -26,13 +30,13 @@
             <img
               v-if="item.image"
               :src="item.image"
-              :style="{ 'height': '50px', 'width': '50px' }"
+              :style="{ height: '50px', width: '50px' }"
               class="cursor-pointer rounded-full border-2 border-teal"
             />
           </td>
           <td>
-            <span v-if="item.name">{{item.id}}. {{ item.name }}</span>
-            <span v-if="!item.name">{{item.id}}. ...</span>
+            <span v-if="item.name">{{ item.id }}. {{ item.name }}</span>
+            <span v-if="!item.name">{{ item.id }}. ...</span>
           </td>
           <td>
             <span v-if="item.quantity">{{ item.quantity }}</span>
@@ -54,10 +58,7 @@
               step="1"
               @input="updateCounter($event, item.modify)"
             />
-            <button
-              class="button-default"
-              @click="increaseCounter(item.id)"
-            >
+            <button class="button-default" @click="increaseCounter(item.id)">
               +
             </button>
           </td>
@@ -102,26 +103,25 @@
         showAddItem: false,
       }
     },
-    components: {AddItem},
+    components: { AddItem },
     watch: {},
     methods: {
-      refreshInventory: async function() {
+      refreshInventory: async function () {
         const erpContract = new ethers.Contract(
-            this.erpStore.ownedERP,
-            erpArtifact.abi,
-            this.getWalletSigner(),
+          this.erpStore.ownedERP,
+          erpArtifact.abi,
+          this.getWalletSigner(),
         )
-        const filter = await erpContract.filters.ItemCreated(
-          null,
-          null,
-        )
+        const filter = await erpContract.filters.ItemCreated(null, null)
         const events = await erpContract.queryFilter(filter)
         const inventory = []
         for (const e of events) {
           fetch(this.getIPFS(e.args.uri))
-          .then(a => a.json())
-          .then(b => this.setMetadataInfo(e.args.tokenId, b))
-          const balance = (await erpContract.balanceOf(this.erpStore.ownedERP, e.args.tokenId)).toNumber()
+            .then((a) => a.json())
+            .then((b) => this.setMetadataInfo(e.args.tokenId, b))
+          const balance = (
+            await erpContract.balanceOf(this.erpStore.ownedERP, e.args.tokenId)
+          ).toNumber()
           const formatted = {
             id: e.args.tokenId,
             quantity: balance,
@@ -132,7 +132,8 @@
         this.inventory = inventory
       },
       setMetadataInfo: async function (tokenId, metadata) {
-        const item = this.inventory.find(i => i.id == tokenId)
+        const item = this.inventory.find((i) => i.id == tokenId)
+        if (!item) return
         item.name = metadata.name
         item.description = metadata.description
         item.image = metadata.image
@@ -147,21 +148,23 @@
       },
       updateCounter: function (event, itemID) {
         const value = parseInt(event.target.value)
-        if(value < 0) return
+        if (value < 0) return
         const item = this.inventory.find((obj) => obj.id == itemID)
         item.modify = value
       },
       saveInventory: async function () {
         const ids = []
         const amounts = []
-        this.inventory.filter(i => i.modify > 0).forEach(element => {
-          ids.push(element.id)
-          amounts.push(element.modify)
-        })
+        this.inventory
+          .filter((i) => i.modify > 0)
+          .forEach((element) => {
+            ids.push(element.id)
+            amounts.push(element.modify)
+          })
         const erpContract = new ethers.Contract(
-            this.erpStore.ownedERP,
-            erpArtifact.abi,
-            this.getWalletSigner(),
+          this.erpStore.ownedERP,
+          erpArtifact.abi,
+          this.getWalletSigner(),
         )
         const transaction = await erpContract.mintBatchInventory(ids, amounts)
         await transaction.wait()
@@ -169,7 +172,8 @@
       },
       closeAdd: function () {
         this.showAddItem = false
-      }
+        this.refreshInventory()
+      },
     },
   }
 </script>

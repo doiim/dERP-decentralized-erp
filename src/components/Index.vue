@@ -62,6 +62,7 @@
   import CustomButton from './CustomButton.vue'
 
   import localhostAddresses from '../../deploys/localhost.json'
+  import mumbaiAddresses from '../../deploys/mumbai.json'
   import erpFactoryArtifact from '../../artifacts/contracts/web3RPFactory.sol/Web3RPFactory.json'
 
   export default {
@@ -90,7 +91,7 @@
     methods: {
       async refreshERP() {
         const erpContract = new ethers.Contract(
-          localhostAddresses.web3rp,
+          this.accountStore.network == "80001" ? mumbaiAddresses.web3rp : localhostAddresses.web3rp,
           erpFactoryArtifact.abi,
           this.getWalletSigner(),
         )
@@ -101,7 +102,7 @@
         )
         const events = await erpContract.queryFilter(filter)
         if (events.length > 0) {
-          console.log(events[0].args.erp)
+          // console.log(events[0].args.erp)
           this.erpStore.setERP(events[0].args.erp)
           if (this.wasDeployed) {
             party.confetti(document.body, {
@@ -115,7 +116,7 @@
       async deployERP() {
         // The Contract object
         const erpContract = new ethers.Contract(
-          localhostAddresses.web3rp,
+          this.accountStore.network == "80001" ? mumbaiAddresses.web3rp : localhostAddresses.web3rp,
           erpFactoryArtifact.abi,
           this.getWalletSigner(),
         )

@@ -19,7 +19,7 @@
         </aside>
       </div>
     </div>
-    <div class="w-full p-3 m-8">
+    <div class="w-full p-3 px-4">
       <div>
         <router-view></router-view>
       </div>

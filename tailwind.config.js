@@ -22,7 +22,8 @@ module.exports = {
       'white': '#FEFEFE',
       'teal': '#0D9488',
       'dark-teal': '#115E59',
-      'grey': '#F3F4F6'
+      'grey': '#F3F4F6',
+      'dark-grey': '#1F2937'
     },
     spacing: {
       '1': '8px',

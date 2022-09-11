@@ -2,25 +2,41 @@
   <div class="grid">
     <h1>Inventory</h1>
     <button
+      v-if="!showAddItem"
       class="bg-dark-green rounded px-2 py-1 drop-shadow"
       @click="showAddItem = true"
     >
       New Item
     </button>
-    <div v-if="showAddItem">
-      <h2>Add new item</h2>
-      <form class="my-1">
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Description" />
-      </form>
-      <button @click="showAddItem = false">Cancel</button>
-      <button
-        class="bg-dark-green rounded px-2 py-1 drop-shadow"
-        @click="addItem"
-      >
-        Add
-      </button>
+    <h3 v-if="showAddItem" class="flex-grow">Add Item</h3>
+    <Transition>
+      <div v-if="showAddItem" class="flex flex-row">
+        <img v-if="!newItemImage" 
+          src="./../assets/upload-image.png"
+          :style="{ 'height': '120px', 'width': '120px' }"
+          class="rounded-full border-2 border-dark-green m-3"
+
+        />
+        <div>
+          <form class="my-1">
+            <div>Item Name:</div>
+            <input type="text" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1" placeholder="Name" /><br/>
+            <div>Item Description:</div>
+            <input type="text" class="bg-white border-2 border-dark-green text-black rounded px-2 py-1" placeholder="Description" />
+          </form>
+          <button @click="showAddItem = false">Cancel</button>
+          <button
+            class="bg-dark-green rounded px-2 py-1 drop-shadow"
+            @click="addItem"
+          >
+            Add
+          </button>
+        </div>
+        <div class="flex-grow">
+
+        </div>
     </div>
+    </Transition>
     <table class="table-fixed mt-6">
       <thead>
         <tr>
@@ -70,9 +86,10 @@
 
 <script>
   import { inject } from 'vue'
-  // import { ethers } from 'ethers'
 
   import { useAccountStore } from '../stores/account'
+
+  import ImageComponent from './ImageComponent.vue'
 
   export default {
     setup() {
@@ -82,6 +99,7 @@
     },
     data() {
       return {
+        newItemImage: '',
         inventory: [
           { id: 1, name: 'test', description: 'hello', quantity: 66 },
           { id: 2, name: 'test 2', description: 'hello', quantity: 24 },
@@ -90,7 +108,7 @@
         showAddItem: false,
       }
     },
-    components: {},
+    components: {ImageComponent},
     watch: {},
     methods: {
       increaseCounter: function (itemID) {

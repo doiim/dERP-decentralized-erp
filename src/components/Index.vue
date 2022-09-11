@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center" v-if="!accountStore.account">
+  <div class="text-center">
     <h2 class="mb-4 mt-2">
       Imagine a ERP, or Enterprise Resource Planning, without the E
     </h2>
@@ -30,11 +30,6 @@
       Decentralized Resource Planning application for people to nurture their
       work routine.
     </p>
-  </div>
-
-  <div class="my-6">
-    <div v-if="!waiting"><AccountWidget /></div>
-    <div v-if="waiting">wait...</div>
   </div>
 
   <div

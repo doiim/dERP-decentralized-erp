@@ -55,7 +55,18 @@
     @apply light-shadow dark:dark-shadow bg-dark-green min-h-screen;
 }
 
-
 .sidebar {
     width: 300px;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: all .1s ease-in-out;
+
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0px;
+  transform: translate(-100px);
 }

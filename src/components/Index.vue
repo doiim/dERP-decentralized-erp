@@ -1,9 +1,9 @@
 <template>
   <div class="text-center" v-if="!accountStore.account">
-    <h2 class="mb-4 mt-2">
-      Imagine a ERP, or Enterprise Resource Planning, without the E
+    <h2 class="my-6" style="font-weight: 900; margin-top: 200px">
+      Imagine a ERP, or Enterprise Resource Planning, without the "E"
     </h2>
-    <p class="text-center py-1">
+    <!-- <p class="text-center py-1 ">
       I mean, replace the profit-oriented centralized organization for a DAO
       taking care of it.
     </p>
@@ -13,7 +13,7 @@
       may be able to build upon for the next generations of our full-immersive
       digital society?
     </p>
-    <p class="text-center py-3 font-bold">Therefore... welcome to web3RP!</p>
+    <p class="text-center py-3 font-bold text-md">Therefore... welcome to web3RP!</p> -->
 
     <!-- <p class="text-center py-1">
       Forget about Microsoft / SAP / Oracle selling atrocious Dynamics /
@@ -34,18 +34,20 @@
 
   <div
     class="my-4"
+    style="margin-top: 200px"
     v-if="!waiting && accountStore.account && !erpStore.ownedERP"
   >
     <CustomButton @click="deployERP"> Deploy Your Own web3RP </CustomButton>
   </div>
-  <div v-if="!waiting && accountStore.account && erpStore.ownedERP">
-    Your ERP is deployed at {{ erpStore.ownedERP }}
+  <div v-if="!waiting && accountStore.account && erpStore.ownedERP" class="text-center" style="margin-top: 200px">
+    <h1 class="mb-0">Your ERP is already deployed!</h1>
+    <p class="text-center">@{{ erpStore.ownedERP }}</p>
   </div>
 
-  <div class="flex place-content-end flex-wrap mt-32" style="width: 50%">
-    <img src="../assets/doiim.png" alt="" style="width: 150px">
-    <p class="text-right">We design, build and maintain a range of projects, from proof of concept and the minimum viable product to scaling</p>
-    <a class="mt-1" href="https://doiim.com">doiim.com</a>
+  <div style="position: fixed; bottom: 50px; right 50px;">
+    <img src="../assets/doiim.png" alt="" style="width: 120px">
+    <p class="text-sm ">We design, build and maintain a range of projects, from proof of concept and the minimum viable product to scaling</p>
+    <a class="text-sm mt-1" href="https://doiim.com">doiim.com</a>
   </div>
 
 </template>

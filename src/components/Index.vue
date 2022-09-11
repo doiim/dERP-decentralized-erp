@@ -46,7 +46,7 @@
 <script>
   import { inject } from 'vue'
   import { ethers } from 'ethers'
-
+  import party from 'party-js'
   import { useAccountStore } from '../stores/account'
   import { useERPStore } from '../stores/erp'
   import AccountWidget from './AccountWidget.vue'
@@ -65,7 +65,7 @@
     },
     data() {
       return {
-        temp: false,
+        wasDeployed: false,
         waiting: false,
       }
     },
@@ -95,6 +95,11 @@
         if (events.length > 0) {
           console.log(events[0].args.erp)
           this.erpStore.setERP(events[0].args.erp)
+          if (this.wasDeployed) {
+            party.confetti(document.body, {
+              count: party.variation.range(200, 400),
+            })
+          }
         }
         this.waiting = false
         return
@@ -108,6 +113,7 @@
         )
         const transaction = await erpContract.deployERP()
         this.waiting = true
+        this.wasDeployed = true
         await transaction.wait()
         await this.refreshERP()
         this.waiting = false

@@ -18,9 +18,9 @@
             <li class="my-1 hover:bg-dark-teal hover:rounded py-1 px-2">
               <router-link to="/invoice" class="text-white no-underline">Invoice</router-link>
             </li>
-            <li class="my-1">
-              <router-link to="/invoice">About</router-link>
-            </li>
+            <!-- <li class="my-1 hover:bg-dark-teal hover:rounded py-1 px-2">
+              <router-link to="/invoice" class="text-white no-underline">About</router-link>
+            </li> -->
           </ul>
         </aside>
       </div>

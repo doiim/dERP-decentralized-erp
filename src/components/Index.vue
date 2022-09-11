@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" v-if="!accountStore.account">
     <h2 class="mb-4 mt-2">
       Imagine a ERP, or Enterprise Resource Planning, without the E
     </h2>
@@ -41,6 +41,13 @@
   <div v-if="!waiting && accountStore.account && erpStore.ownedERP">
     Your ERP is deployed at {{ erpStore.ownedERP }}
   </div>
+
+  <div class="flex place-content-end flex-wrap mt-32" style="width: 50%">
+    <img src="../assets/doiim.png" alt="" style="width: 150px">
+    <p class="text-right">We design, build and maintain a range of projects, from proof of concept and the minimum viable product to scaling</p>
+    <a class="mt-1" href="https://doiim.com">doiim.com</a>
+  </div>
+
 </template>
 
 <script>

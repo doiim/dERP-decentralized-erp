@@ -15,14 +15,15 @@ Get a real helper to streamline your business of any size or kind as fast as a c
 
 Decentralized Resource Planning application for people to nurture their work routine.
 
-Modular or Plug & Play business management software
+## Modular or Plug & Play business management software
 
-MVP
+### MVP
 
 supply chain traceability;
 bookkeeping;
 ESG rewards.
-Roadmap
+
+### Roadmap
 
 inventory;
 accounting;
@@ -42,7 +43,8 @@ NFTs accumulated by donors can be used in two ways:
 
 Social recognition for being a sustainable company, in the form of collectible awards (badges);
 Commercializing to other companies that do not have a sustainable development agenda and want to compensate for their impact.
-Skin in the game🫀with glass walls
+
+## Skin in the game🫀with glass walls
 
 Use case for NGOs so it's possible to better control and also give full disclosure of their ledger books.
 
@@ -57,7 +59,7 @@ On maniiva.com there is no pre mine and no investors holding tokens, it’s fund
 
 By holding it you can vote on the DAO’s decision, elect management counsel that conduct day to day operations without creating a governance overhead for every small decision, leaving only the major things to be decided by the token holders. 'Hodling' the token earn dividends from it’s operation, and in case you are in disagreement with the projects progress you can redeem your pro-rata share of the DAO’s treasury any time you want.
 
-Which United Nations SDGs are we engaged with?
+# Which United Nations SDGs are we engaged with?
 
 #2  End hunger, achieve food security and improved nutrition and promote sustainable agriculture
 
@@ -70,7 +72,6 @@ Which United Nations SDGs are we engaged with?
 #17  Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.
 
 
-
-Benchmarking ⤵
+# Benchmarking ⤵
 
 https://coda.io/use-cases

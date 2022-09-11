@@ -123,6 +123,7 @@
       },
       setMetadataInfo: async function (tokenId, metadata) {
         const item = this.inventory.find(i => i.id == tokenId)
+        if (!item) return
         item.name = metadata.name
         item.description = metadata.description
         item.image = metadata.image

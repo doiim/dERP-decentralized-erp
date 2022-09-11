@@ -13,9 +13,8 @@
       }}
     </button> -->
     <div>
-      <p v-if="store.account != ''"><strong>
-        {{store.account.substring(0,6)}}...{{store.account.substring(store.account.length-4,store.account.length)}}
-      </strong>
+      <p v-if="store.account != ''" class="text-grey" >
+        {{store.account.substring(0,6)}}...{{store.account.substring(store.account.length-6,store.account.length)}}
       </p>
       <button
         v-if="store.account != ''"

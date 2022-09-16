@@ -54,6 +54,7 @@ Use case for NGOs so it's possible to better control and also give full disclosu
 [instagram @maniivaciente](https://www.instagram.com/maniivaciente)
 
 Vegan, paleo and raw. DAO connecting food growers, producers and consumers bridging the gap of nutrition and quantified self data. 0% gluten, 0% sugar, 0% salt, 0% soy 0% fry.
+
 Maniiva is a legally binding DAO that operates as a real world LLC. Using Ethereum for incorporation, governance and fundraising It is a legal entity that runs entirely on the blockchain. The owners of the company are it’s employees that receive compensation in cash and tokens representing equity in the LLC based on the amount of hours they work for it. 
 
 All of it is managed though the employees/token holders private keys on otoco.io ‘s dashboard, which is being built by us through [doiim.com](https://doiim.com) and can be used in most kinds of organizations worldwide. From the farm to the table, all the agentes in the supply chain gets compensated as the restaurant produces vegan, paleo and raw food. DAO connecting food growers, producers and consumers bridging the gap of nutrition and quantified self data. 0% gluten, 0% sugar, 0% salt, 0% soy 0% fry.

@@ -21,7 +21,10 @@ Decentralized Resource Planning application for people to nurture their work rou
 - **Supply chain traceability**
 - **Bookkeeping**
 - **ESG rewards**
-- [Demo](https://web3rp.pages.dev/)
+
+[Demo](https://web3rp.pages.dev/)
+
+[Pitch](docs/pitch.pdf)
 
 ![alt](docs/screen1.png)
 ![alt](docs/screen2.png)
